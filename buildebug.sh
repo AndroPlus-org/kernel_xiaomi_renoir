@@ -3,10 +3,10 @@
 # Resources
 THREAD="-j$(nproc --all)"
 
-export CLANG_PATH=/home/vlad/toolchains/proton-clang/bin/
+export CLANG_PATH=~/bin/proton-clang/bin/
 export PATH=${CLANG_PATH}:${PATH}
 export CLANG_TRIPLE=aarch64-linux-gnu-
-export CROSS_COMPILE=/home/vlad/toolchains/proton-clang/bin/aarch64-linux-gnu- CC=clang CXX=clang++
+export CROSS_COMPILE=~/bin/proton-clang/bin/aarch64-linux-gnu- CC=clang CXX=clang++
 
 DEFCONFIG="renoir_defconfig"
 
@@ -18,7 +18,7 @@ ZIMAGE_DIR="$KERNEL_DIR/out/arch/arm64/boot/"
 export LOCALVERSION=-debug
 export ARCH=arm64
 export SUBARCH=$ARCH
-export KBUILD_BUILD_USER=vlad
+export KBUILD_BUILD_USER=$(whoami)
 
 DATE_START=$(date +"%s")
 
@@ -47,20 +47,20 @@ cd $KERNEL_DIR
 if grep -q "error: " kernel.log
 then
 	echo; echo; grep -n "error: " kernel.log; echo "\n\n"
-	chown -R vlad *
-	chgrp -R vlad *
+	chown -R $(whoami) *
+	chgrp -R $(whoami) *
 	exit 0
 elif grep -q "undefined reference to" kernel.log
 then
 	echo; echo; grep -n "undefined reference to" kernel.log; echo "\n\n"
-	chown -R vlad *
-	chgrp -R vlad *
+	chown -R $(whoami) *
+	chgrp -R $(whoami) *
 	exit 0
 elif grep -q "undefined symbol" kernel.log
 then
 	echo; echo; grep -n "undefined symbol" kernel.log; echo "\n\n"
-	chown -R vlad *
-	chgrp -R vlad *
+	chown -R $(whoami) *
+	chgrp -R $(whoami) *
 	exit 0
 elif grep -q "Error 2" kernel.log
 then
@@ -73,9 +73,9 @@ cp -rp ./anykernel/* tmp
 cd tmp
 7za a -mx9 $TIME-tmp.zip *
 cd ..
-rm Noob*.zip
-cp -fp tmp/$TIME-tmp.zip Noob-Kernel-Mi11Lite5G-$TIME.zip
+rm AndroPlus*.zip
+cp -fp tmp/$TIME-tmp.zip AndroPlus-Kernel-Mi11Lite5G-$TIME.zip
 rm -rf tmp
-chown -R vlad *
-chgrp -R vlad *
+chown -R $(whoami) *
+chgrp -R $(whoami) *
 fi

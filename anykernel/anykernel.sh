@@ -4,7 +4,7 @@
 ## AnyKernel setup
 # begin properties
 properties() { '
-kernel.string=Noob kernel by VladV1V @ xda-developers
+kernel.string=AndroPlus kernel
 do.devicecheck=0
 do.modules=0
 do.systemless=0
